@@ -9,11 +9,11 @@
   <script>
     window.addEventListener("deviceorientation", deviceOrientationListener);
     function deviceOrientationListener(event) {
-      document.getElementById("gps").innerHTML = event.webkitCompassHeading;
+      // document.getElementById("gps").innerHTML = event.webkitCompassHeading;
     }
     navigator.geolocation.getCurrentPosition(updateLocation);
     function updateLocation(position) {
-      window.alert(position.coords.latitude);
+      document.getElementById("gps").innerHTML = position.coords.latitude;
     }
 
   </script>
