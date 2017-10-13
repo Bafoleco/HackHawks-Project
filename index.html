@@ -6,7 +6,17 @@
   <link rel="stylesheet" href="https://js.arcgis.com/4.5/esri/css/main.css">
   <script src="https://js.arcgis.com/4.5/"></script>
   <script src="https://ai.github.io/compass.js/compass.js"></script>
+  <script>
+    window.addEventListener("deviceorientation", deviceOrientationListener);
+    function deviceOrientationListener(event) {
+      document.getElementById("gps").innerHTML = event.webkitCompassHeading;
+    }
+    navigator.geolocation.getCurrentPosition(updateLocation);
+    function updateLocation(position) {
+      window.alert(position.coords.latitude);
+    }
 
+  </script>
 
   <!-- /*<style>
     html,
@@ -54,12 +64,7 @@
 <body>
   <div id="viewDiv"></div>
   <p id="gps"> Hello World </p>
-  <script>
-    window.addEventListener("deviceorientation", deviceOrientationListener);
-    function deviceOrientationListener(event) {
-      document.getElementById("gps").innerHTML = event.webkitCompassHeading;
-    }
-  </script>
+
 </body>
 
 </html>
