@@ -57,8 +57,7 @@
   <script>
     window.addEventListener("deviceorientation", deviceOrientationListener);
     function deviceOrientationListener(event) {
-      document.getElementById("gps").innerHTML = "A";
-      document.getElementById("gps").innerHTML = event.gamma;
+      document.getElementById("gps").innerHTML = event.webkitCompassHeading;
     }
   </script>
 </body>
