@@ -55,8 +55,8 @@
   <p id="gps"> Hello World </p>
   <script>
     document.getElementById("gps").innerHTML = "B";
-    Compass.init(function (method) {
-      document.getElementById("gps").innerHTML = method;
+    Compass.init(function (heading) {
+      document.getElementById("gps").innerHTML = heading;
     });
   </script>
 </body>
