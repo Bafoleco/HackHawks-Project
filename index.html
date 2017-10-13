@@ -7,12 +7,11 @@
   <script src="https://js.arcgis.com/4.5/"></script>
   <script src="https://ai.github.io/compass.js/compass.js"></script>
   <script>
-    var paragraph = document.getElementById("gps").innerHTML
     window.addEventListener("deviceorientation", deviceOrientationListener);
     function deviceOrientationListener(event) {
-      paragraph = event.gamma;
+      document.getElementById("gps").innerHTML = "A";
+      document.getElementById("gps").innerHTML = event.gamma;
     }
-
   </script>
 
   <!-- /*<style>
