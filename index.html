@@ -6,26 +6,7 @@
   <link rel="stylesheet" href="https://js.arcgis.com/4.5/esri/css/main.css">
   <script src="https://js.arcgis.com/4.5/"></script>
   <script src="https://ai.github.io/compass.js/compass.js"></script>
-  <script>
-    document.getElementById("compass/gps").innerHTML = "B";
-    Compass.noSupport(function () {
-      $('.compass').hide();
-    });
-    Compass.needGPS(function () {
-      $('.go-outside-message').show();          // Step 1: we need GPS signal
-    }).needMove(function () {
-      $('.go-outside-message').hide()
-      $('.move-and-hold-ahead-message').show(); // Step 2: user must go forward
-    }).init(function () {
-      $('.move-and-hold-ahead-message').hide(); // GPS hack is enabled
-    });
-    Compass.watch(function (heading) {
-      $('.degrees').text(heading);
-      $('.compass').css('transform', 'rotate(' + (-heading) + 'deg)');
-      document.getElementById("compass/gps").innerHTML = "A";
-    });
 
-  </script>
   <!-- /*<style>
     html,
     body,
@@ -71,7 +52,14 @@
 
 <body>
   <div id="viewDiv"></div>
-  <p id="compass/gps"> Hello World </p>
+  <p id="gps"> Hello World </p>
+  <script>
+    document.getElementById("gps").innerHTML = "B";
+    Compass.watch(function (heading) {
+      document.getElementById("compass/gps").innerHTML = "A";
+    });
+
+  </script>
 </body>
 
 </html>
