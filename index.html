@@ -19,22 +19,6 @@
   </style>
 
   <script>
-      var heading = 0;
-
-      var latitude = 0;
-
-      var longitude = 0;
-
-      window.addEventListener("deviceorientation", deviceOrientationListener);
-      function deviceOrientationListener(event) {
-          heading = event.webkitCompassHeading;
-      }
-      navigator.geolocation.getCurrentPosition(updateLocation);
-      function updateLocation(position) {
-        latitude = position.coords.latitude;
-        longitude = position.coords.longitude;
-      }
-
     require([
       "esri/Map",
       "esri/views/MapView",
@@ -49,16 +33,28 @@
         basemap: "dark-gray",
       });
 
+      window.addEventListener("deviceorientation", deviceOrientationListener);
+      function deviceOrientationListener(event) {
+          var heading = event.webkitCompassHeading;
+      }
+      navigator.geolocation.getCurrentPosition(updateLocation);
+      function updateLocation(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        map.centerAt(new Point(longitude, latitude))
+      }
+
       // points to the states layer in a service storing U.S. census data
-      var fl = new FeatureLayer({
-        url: "https://services.arcgis.com/YKJ5JtnaPQ2jDbX8/arcgis/rest/services/VDH_Health_Districts_WM/FeatureServer/0"
-      });
-      map.add(fl);  // adds the layer to the map
+      // var fl = new FeatureLayer({
+      //   url: "https://services.arcgis.com/YKJ5JtnaPQ2jDbX8/arcgis/rest/services/VDH_Health_Districts_WM/FeatureServer/0"
+      // });
+      // map.add(fl);
+      // adds the layer to the map
 
       var view = new MapView({
         container: "viewDiv",
         map: map,
-        center: [-72.5778, 44.5588],
+        center: [-90, 0],
         zoom: 6
       });
 
