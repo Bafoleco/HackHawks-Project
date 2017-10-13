@@ -7,9 +7,22 @@
   <script src="https://js.arcgis.com/4.5/"></script>
   <script src="https://ai.github.io/compass.js/compass.js"></script>
   <script>
+    Compass.noSupport(function () {
+      $('.compass').hide();
+    });
+    Compass.needGPS(function () {
+      $('.go-outside-message').show();          // Step 1: we need GPS signal
+    }).needMove(function () {
+      $('.go-outside-message').hide()
+      $('.move-and-hold-ahead-message').show(); // Step 2: user must go forward
+    }).init(function () {
+      $('.move-and-hold-ahead-message').hide(); // GPS hack is enabled
+    });
     Compass.watch(function (heading) {
-      Document.getElementById("compass/gps").innerHTML = heading;
-    })
+    $('.degrees').text(heading);
+    $('.compass').css('transform', 'rotate(' + (-heading) + 'deg)');
+    });
+
   </script>
   <!-- /*<style>
     html,
