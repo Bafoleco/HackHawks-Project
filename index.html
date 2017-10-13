@@ -7,6 +7,7 @@
   <script src="https://js.arcgis.com/4.5/"></script>
   <script src="https://ai.github.io/compass.js/compass.js"></script>
   <script>
+    Document.getElementById("compass/gps").innerHTML = "B";
     Compass.noSupport(function () {
       $('.compass').hide();
     });
@@ -19,8 +20,9 @@
       $('.move-and-hold-ahead-message').hide(); // GPS hack is enabled
     });
     Compass.watch(function (heading) {
-    $('.degrees').text(heading);
-    $('.compass').css('transform', 'rotate(' + (-heading) + 'deg)');
+      $('.degrees').text(heading);
+      $('.compass').css('transform', 'rotate(' + (-heading) + 'deg)');
+      Document.getElementById("compass/gps").innerHTML = "A";
     });
 
   </script>
