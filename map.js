@@ -19,9 +19,9 @@ function zip(a, b) {
 
 function tail(a) {
     return slice(1, a.length);
-}	
-  
-    
+}
+
+
   require([
   "esri/Map",
   "esri/views/MapView",
@@ -34,7 +34,7 @@ function tail(a) {
   "dojo/domReady!"
 ], function(
     Map, MapView, FeatureLayer, Legend, Point, Polygon, Graphic, Circle) {
-  
+
     var fl_roadside_markers = new FeatureLayer({
         url: "http://anrmaps.vermont.gov/arcgis/rest/services/map_services/ACCD_OpenData/MapServer/12/query?outFields=*&where=1%3D1",
 	outFields: ["*"]
@@ -57,7 +57,7 @@ function tail(a) {
         title: "{name}",
         content: "<p>{description}</p>"
     };
-    
+
     var fl_outdoor_recreation = new FeatureLayer({
         url: "https://anrmaps.vermont.gov/arcgis/rest/services/Open_Data/OPENDATA_ANR_TOURISM_SP_NOCACHE_v2/MapServer/166/query?outFields=*&where=1%3D1",
 	outFields: ["*"]
@@ -80,27 +80,27 @@ function tail(a) {
         title: "{SITE_NAME}",
         content: "<p>Seriously.</p>"
     };
-      
+
     var map = new Map({
         basemap: "dark-gray-vector",
 	layers: [fl_roadside_markers, fl_outdoor_recreation]
     });
-    
+
     navigator.geolocation.getCurrentPosition(updateLocation);
     function updateLocation(position) {
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
         view.center = [longitude, latitude];
     }
-  
+
     window.addEventListener("deviceorientation", deviceOrientationListener);
     function deviceOrientationListener(event) {
         var heading = event.webkitCompassHeading;
         view.rotation = heading;
     }
-   
+
     var stencilPolygon;
-  
+
     var view = new MapView({
       container: "viewDiv",
       map: map,
@@ -108,31 +108,29 @@ function tail(a) {
       zoom: 15,
       constraints: {
 	  snapToZoom: false,
-	  minScale: 15,
-	  maxScale: 15
       }
       });
-  
+
     function sizeWindow(event) {
       var diameter = Math.floor(0.94 * Math.min(window.innerHeight, window.innerWidth));
       document.getElementById("canvas").height = window.innerHeight;
       document.getElementById("canvas").width =  window.innerWidth;
       drawCicle(diameter/2);
       view.center = [longitude, latitude];
-  
+
     }
     window.onresize = sizeWindow;
-  
+
     var latitude = 0;
     var longitude = 0;
-  
+
     navigator.geolocation.getCurrentPosition(updateLocation);
     function updateLocation(position) {
        latitude = position.coords.latitude;
        longitude = position.coords.longitude;
        view.center = [longitude, latitude];
     }
-  
+
     window.addEventListener("deviceorientation", deviceOrientationListener);
     function deviceOrientationListener(event) {
         var heading = event.webkitCompassHeading;
