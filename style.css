@@ -1,17 +1,18 @@
 html,
 body,
 
-.circleMap {
-  /*border-radius: 50%;*/
-  /*overflow: "hidden";*/
-  -webkit-border-radius: 200px;
-  position: relative;
+.toplayer {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 30;
 }
 
-.container {
-  width: 100%;
-  position: relative;
-
+#viewDiv {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 3;
 }
 
 .esri-attribution {
@@ -27,4 +28,8 @@ body,
 .esri-widget-esri-interactive {
   width: 0%;
   height:0%;
+}
+
+.esri-popup {
+    z-index:40;
 }
