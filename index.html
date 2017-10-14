@@ -34,11 +34,6 @@
         basemap: "dark-gray",
       });
 
-      window.addEventListener("deviceorientation", deviceOrientationListener);
-      function deviceOrientationListener(event) {
-          var heading = event.webkitCompassHeading;
-      }
-
       // points to the states layer in a service storing U.S. census data
       // var fl = new FeatureLayer({
       //   url: "https://services.arcgis.com/YKJ5JtnaPQ2jDbX8/arcgis/rest/services/VDH_Health_Districts_WM/FeatureServer/0"
@@ -58,6 +53,12 @@
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
         view.center = [longitude, latitude];
+      }
+
+      window.addEventListener("deviceorientation", deviceOrientationListener);
+      function deviceOrientationListener(event) {
+          var heading = event.webkitCompassHeading;
+          view.rotation = heading; 
       }
 
 
