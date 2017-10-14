@@ -45,7 +45,7 @@
         container: "viewDiv",
         map: map,
         center: [-90, 0],
-        zoom: 6
+        zoom: 15
       });
 
       navigator.geolocation.getCurrentPosition(updateLocation);
@@ -58,7 +58,7 @@
       window.addEventListener("deviceorientation", deviceOrientationListener);
       function deviceOrientationListener(event) {
           var heading = event.webkitCompassHeading;
-          view.rotation = heading; 
+          view.rotation = heading;
       }
 
 
