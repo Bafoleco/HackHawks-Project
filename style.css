@@ -1,0 +1,30 @@
+html,
+body,
+
+.circleMap {
+  border-radius: 50%;
+  overflow: "hidden";
+  -webkit-border-radius: 50%;
+  position: relative;
+}
+
+.container {
+  width: 100%;
+  position: relative;
+
+}
+
+.esri-attribution {
+  width: 0%;
+  height:0%;
+}
+
+.esri-widget-button {
+  width: 0%;
+  height:0%;
+}
+
+.esri-widget-esri-interactive {
+  width: 0%;
+  height:0%;
+}
