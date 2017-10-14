@@ -41,8 +41,8 @@ require([
     var longitude = 0;
 
     var fl_roadside_markers = new FeatureLayer({
-        url: "https://anrmaps.vermont.gov/arcgis/rest/services/map_services/ACCD_OpenData/MapServer/12/query?outFields=*&where=1%3D1",
-	outFields: ["*"]
+        url: "http://anrmaps.vermont.gov/arcgis/rest/services/map_services/ACCD_OpenData/MapServer/12/query?outFields=*&where=1%3D1",
+	       outFields: ["*"]
     });
     fl_roadside_markers.renderer = {
 	     type: "simple",
@@ -162,3 +162,34 @@ require([
         // throw new Error("SHds");
     }
     sizeWindow();
+
+    //ERROR reporting
+    function printPre(obj) {
+      const pre = document.createElement('pre');
+      pre.innerHTML = JSON.stringify(obj, null, 2);
+      document.body.appendChild(pre);
+      pre.classList.add("error")
+      const onClick = function () {
+        document.body.removeChild(pre)
+        pre.removeEventListener("click", onClick)
+      }
+      pre.addEventListener("click", onClick)
+    }
+
+    window.addEventListener("error", function(errorevent){
+      const error = errorevent.error;
+      if(error) {
+        printPre({
+          error : errorevent.error.toString(),
+          stack : errorevent.error.stack
+        })
+      }
+      else {
+        printPre({
+          error: errorevent.message
+        })
+      }
+    })
+
+
+});
