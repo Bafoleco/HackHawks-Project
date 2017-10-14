@@ -6,49 +6,111 @@ function sizeWindow(event) {
 
 window.onresize = sizeWindow;
 
+function toAcronymCase(s) {
+    a = s.split("");
+    b = zip(tail(a), a);
+    c = [a[0].toUpperCase()].concat(b.map(function(x) {
+	y = x[1];
+	if (y === ' ') {
+	    return x[0].toUpperCase();
+	} else {
+	    return x[0].toLowerCase();
+	}
+    }));
+    return c.join("");
+}
+
+// a and b must have the same length, or a must be smaller than b.
+function zip(a, b) {
+    return a.map(function(x, i) {return [x].concat([b[i]]);});
+}
+
+function tail(a) {
+    return slice(1, a.length);
+}	
+  
 require([
-  "esri/Map",
-  "esri/views/MapView",
-  "esri/layers/FeatureLayer",
-  "esri/widgets/Legend",
-  "esri/geometry/Point",
-  "dojo/domReady!"
-], function(
-  Map, MapView, FeatureLayer, Legend, Point
-) {
+    "esri/Map",
+    "esri/views/MapView",
+    "esri/layers/FeatureLayer",
+    "esri/widgets/Legend",
+    "esri/geometry/Point",
+    "dojo/domReady!"
+  ], function(
+    Map, MapView, FeatureLayer, Legend, Point
+  ) {
+    
+  
+  
+    var fl_roadside_markers = new FeatureLayer({
+        url: "http://anrmaps.vermont.gov/arcgis/rest/services/map_services/ACCD_OpenData/MapServer/12/query?outFields=*&where=1%3D1",
+	outFields: ["*"]
+    });
+    fl_roadside_markers.renderer = {
+	type: "simple",
+	symbol: {
+	    type: "simple-marker",
+	    size: 10,
+	    color: "#002b36",
+	    outline: {
+		width: 0,
+		color: "white"
+	    }
+	}
+    };
+    //map.layers.add(fl_roadside_markers);
 
-  var map = new Map({
-    basemap: "dark-gray",
-  });
+    fl_roadside_markers.popupTemplate = {
+        title: "{name}",
+        content: "<p>{description}</p>"
+    };
+    
+    var fl_outdoor_recreation = new FeatureLayer({
+        url: "https://anrmaps.vermont.gov/arcgis/rest/services/Open_Data/OPENDATA_ANR_TOURISM_SP_NOCACHE_v2/MapServer/166/query?outFields=*&where=1%3D1",
+	outFields: ["*"]
+    });
+    fl_outdoor_recreation.renderer = {
+	type: "simple",
+	symbol: {
+	    type: "simple-marker",
+	    size: 10,
+	    color: "#93a1a1",
+	    outline: {
+		width: 0,
+		color: "white"
+	    }
+	}
+    };
+    //map.layers.add(fl_outdoor_recreation);
 
-  // points to the states layer in a service storing U.S. census data
-  // var fl = new FeatureLayer({
-  //   url: "https://services.arcgis.com/YKJ5JtnaPQ2jDbX8/arcgis/rest/services/VDH_Health_Districts_WM/FeatureServer/0"
-  // });
-  // map.add(fl);
-  // adds the layer to the map
-
-  var view = new MapView({
-    container: "viewDiv",
-    map: map,
-    center: [-90, 0],
-    zoom: 15
-  });
-
-  navigator.geolocation.getCurrentPosition(updateLocation);
-  function updateLocation(position) {
-    var latitude = position.coords.latitude;
-    var longitude = position.coords.longitude;
-    view.center = [longitude, latitude];
-  }
-
-  window.addEventListener("deviceorientation", deviceOrientationListener);
-  function deviceOrientationListener(event) {
-      var heading = event.webkitCompassHeading;
-      view.rotation = heading;
-  }
-
-
-
-
+    fl_outdoor_recreation.popupTemplate = {
+        title: "{SITE_NAME}",
+        content: "<p>Seriously.</p>"
+    };
+      
+    var map = new Map({
+        basemap: "dark-gray-vector",
+	layers: [fl_roadside_markers, fl_outdoor_recreation]
+    });
+    
+    var view = new MapView({
+        container: "viewDiv",
+        map: map,
+        center: [-90, 0],
+        zoom: 15
+    });
+  
+    navigator.geolocation.getCurrentPosition(updateLocation);
+    function updateLocation(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        view.center = [longitude, latitude];
+    }
+  
+    window.addEventListener("deviceorientation", deviceOrientationListener);
+    function deviceOrientationListener(event) {
+        var heading = event.webkitCompassHeading;
+        view.rotation = heading;
+    }
+  
 });

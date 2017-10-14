@@ -1,0 +1,22 @@
+{
+  "name": "bafoleco.github.io",
+  "version": "1.0.0",
+  "description": "The HackHawk's HackVT project.",
+  "main": ".#map.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bafoleco/Bafoleco.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bafoleco/Bafoleco.github.io/issues"
+  },
+  "homepage": "https://github.com/Bafoleco/Bafoleco.github.io#readme",
+  "dependencies": {
+    "terraformer": "^1.0.8"
+  }
+}
