@@ -109,6 +109,7 @@ function tail(a) {
       constraints: {
 	  snapToZoom: false,
 	  maxScale: 10
+      }
       });
   
     function sizeWindow(event) {
