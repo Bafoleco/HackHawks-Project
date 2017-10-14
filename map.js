@@ -162,34 +162,3 @@ require([
         // throw new Error("SHds");
     }
     sizeWindow();
-
-    //ERROR reporting
-    function printPre(obj) {
-      const pre = document.createElement('pre');
-      pre.innerHTML = JSON.stringify(obj, null, 2);
-      document.body.appendChild(pre);
-      pre.classList.add("error")
-      const onClick = function () {
-        document.body.removeChild(pre)
-        pre.removeEventListener("click", onClick)
-      }
-      pre.addEventListener("click", onClick)
-    }
-
-    window.addEventListener("error", function(errorevent){
-      const error = errorevent.error;
-      if(error) {
-        printPre({
-          error : errorevent.error.toString(),
-          stack : errorevent.error.stack
-        })
-      }
-      else {
-        printPre({
-          error: errorevent.message
-        })
-      }
-    })
-
-
-});
