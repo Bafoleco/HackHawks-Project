@@ -18,7 +18,7 @@ require([
 ) {
 
   var map = new Map({
-    basemap: "dark-gray",
+    basemap: "dark-gray-vector",
   });
 
   // points to the states layer in a service storing U.S. census data
@@ -47,8 +47,4 @@ require([
       var heading = event.webkitCompassHeading;
       view.rotation = heading;
   }
-
-
-
-
 });
