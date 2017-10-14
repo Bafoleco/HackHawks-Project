@@ -24,9 +24,10 @@
       "esri/views/MapView",
       "esri/layers/FeatureLayer",
       "esri/widgets/Legend",
+      "esri/geometry/Point",
       "dojo/domReady!"
     ], function(
-      Map, MapView, FeatureLayer, Legend
+      Map, MapView, FeatureLayer, Legend, Point
     ) {
 
       var map = new Map({
@@ -36,12 +37,6 @@
       window.addEventListener("deviceorientation", deviceOrientationListener);
       function deviceOrientationListener(event) {
           var heading = event.webkitCompassHeading;
-      }
-      navigator.geolocation.getCurrentPosition(updateLocation);
-      function updateLocation(position) {
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
-        map.centerAt(new Point(longitude, latitude))
       }
 
       // points to the states layer in a service storing U.S. census data
@@ -57,6 +52,14 @@
         center: [-90, 0],
         zoom: 6
       });
+
+      navigator.geolocation.getCurrentPosition(updateLocation);
+      function updateLocation(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        view.center = [longitude, latitude];
+      }
+
 
     });
   </script>
