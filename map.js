@@ -107,7 +107,11 @@ function tail(a) {
       center: [-90, 0],
       zoom: 15,
       constraints: {
+<<<<<<< HEAD
          snapToZoom: false,
+=======
+	  snapToZoom: false,
+>>>>>>> b2ab0321ead974bf514ff189bd934ecfd1162349
       }
       });
 
