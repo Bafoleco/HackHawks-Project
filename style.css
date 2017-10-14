@@ -2,10 +2,9 @@ html,
 body,
 
 .circleMap {
-  /*border-radius: 50%;*/
-  /*overflow: "hidden";*/
-  -webkit-border-top-radius: 200px;
-  position: relative;
+  overflow: "hidden";
+  position: absolute;
+  /*-webkit-border-radius: 50%*/
 }
 
 .container {

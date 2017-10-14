@@ -2,6 +2,7 @@ function sizeWindow(event) {
   var diameter = Math.floor(0.8 * Math.min(window.innerHeight, window.innerWidth));
   document.getElementById("viewDiv").style.height = "" + diameter + "px";
   document.getElementById("viewDiv").style.width = "" + diameter + "px";
+  document.getElementById("viewDiv").style.borderRadius = "50%";
 }
 
 window.onresize = sizeWindow;
