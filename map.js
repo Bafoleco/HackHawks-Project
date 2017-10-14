@@ -108,7 +108,6 @@ function tail(a) {
       zoom: 15,
       constraints: {
          snapToZoom: false,
-         maxScale: 15
       }
       });
 
