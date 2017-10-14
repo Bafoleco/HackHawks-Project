@@ -105,8 +105,11 @@ function tail(a) {
       container: "viewDiv",
       map: map,
       center: [-90, 0],
-      zoom: 15
-    });
+      zoom: 15,
+      constraints: {
+	  snapToZoom: false,
+	  maxScale: 10
+      });
   
     function sizeWindow(event) {
       var diameter = Math.floor(0.94 * Math.min(window.innerHeight, window.innerWidth));
