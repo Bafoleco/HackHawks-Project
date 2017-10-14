@@ -39,7 +39,7 @@ function tail(a) {
     var longitude = 0;
 
     var fl_roadside_markers = new FeatureLayer({
-        url: "http://anrmaps.vermont.gov/arcgis/rest/services/map_services/ACCD_OpenData/MapServer/12/query?outFields=*&where=1%3D1",
+        url: "https://anrmaps.vermont.gov/arcgis/rest/services/map_services/ACCD_OpenData/MapServer/12/query?outFields=*&where=1%3D1",
 	outFields: ["*"]
     });
     fl_roadside_markers.renderer = {
