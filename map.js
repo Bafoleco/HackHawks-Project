@@ -1,11 +1,3 @@
-function sizeWindow(event) {
-  var diameter = Math.floor(0.8 * Math.min(window.innerHeight, window.innerWidth));
-  document.getElementById("viewDiv").style.height = "" + diameter + "px";
-  document.getElementById("viewDiv").style.width = "" + diameter + "px";
-  document.getElementById("viewDiv").style.borderRadius = "50%";
-}
-
-window.onresize = sizeWindow;
 
 require([
   "esri/Map",
@@ -13,21 +5,18 @@ require([
   "esri/layers/FeatureLayer",
   "esri/widgets/Legend",
   "esri/geometry/Point",
+  "esri/geometry/Polygon",
+  "esri/geometry/Circle",
+  "esri/Graphic",
   "dojo/domReady!"
 ], function(
-  Map, MapView, FeatureLayer, Legend, Point
+  Map, MapView, FeatureLayer, Legend, Point, Polygon, Graphic, Circle
 ) {
+  var stencilPolygon;
 
   var map = new Map({
-    basemap: "dark-gray-vector",
+    basemap: "dark-gray-vector"
   });
-
-  // points to the states layer in a service storing U.S. census data
-  // var fl = new FeatureLayer({
-  //   url: "https://services.arcgis.com/YKJ5JtnaPQ2jDbX8/arcgis/rest/services/VDH_Health_Districts_WM/FeatureServer/0"
-  // });
-  // map.add(fl);
-  // adds the layer to the map
 
   var view = new MapView({
     container: "viewDiv",
@@ -36,11 +25,24 @@ require([
     zoom: 15
   });
 
+  function sizeWindow(event) {
+    var diameter = Math.floor(0.8 * Math.min(window.innerHeight, window.innerWidth));
+    document.getElementById("canvas").height = window.innerHeight;
+    document.getElementById("canvas").width =  window.innerWidth;
+    drawCicle(diameter/2);
+    view.center = [longitude, latitude];
+
+  }
+  window.onresize = sizeWindow;
+
+  var latitude = 0;
+  var longitude = 0;
+
   navigator.geolocation.getCurrentPosition(updateLocation);
   function updateLocation(position) {
-    var latitude = position.coords.latitude;
-    var longitude = position.coords.longitude;
-    view.center = [longitude, latitude];
+     latitude = position.coords.latitude;
+     longitude = position.coords.longitude;
+     view.center = [longitude, latitude];
   }
 
   window.addEventListener("deviceorientation", deviceOrientationListener);
@@ -48,4 +50,5 @@ require([
       var heading = event.webkitCompassHeading;
       view.rotation = heading;
   }
+  sizeWindow();
 });

@@ -1,16 +1,18 @@
 html,
 body,
 
-.circleMap {
-  overflow: "hidden";
+.toplayer {
   position: absolute;
-  /*-webkit-border-radius: 50%*/
+  top: 0px;
+  left: 0px;
+  z-index: 30;
 }
 
-.container {
-  width: 100%;
-  position: relative;
-
+#viewDiv {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 3;
 }
 
 .esri-attribution {
