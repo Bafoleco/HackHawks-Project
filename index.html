@@ -10,15 +10,29 @@
   <style>
     html,
     body,
-    #viewDiv {
-      padding: 0;
-      margin: 0;
-      height: 100%;
-      width: 100%;
+
+    .circleMap {
+      border-radius: 50%;
+      position: relative;
     }
+
+    .container {
+      width: 100%;
+      position: relative;
+
+    }
+
   </style>
 
   <script>
+    function sizeWindow(event) {
+      var diameter = Math.floor(0.8 * Math.min(window.innerHeight, window.innerWidth));
+      document.getElementById("viewDiv").style.height = "" + diameter + "px";
+      document.getElementById("viewDiv").style.width = "" + diameter + "px";
+    }
+
+    window.onresize = sizeWindow;
+
     require([
       "esri/Map",
       "esri/views/MapView",
@@ -62,12 +76,16 @@
       }
 
 
+
+
     });
+
   </script>
 </head>
 
 <body>
-  <div id="viewDiv"></div>
+  <div id="viewDiv" class="circleMap"></div>
+  <script>sizeWindow();</script>
 </body>
 
 </html>
